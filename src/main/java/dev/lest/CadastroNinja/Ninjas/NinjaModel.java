@@ -1,6 +1,9 @@
-package dev.lest.CadastroNinja;
+package dev.lest.CadastroNinja.Ninjas;
 
+import dev.lest.CadastroNinja.Missoes.MissoesNinjaModel;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 
 // Transforma uma classe em Entidade do DB
@@ -14,6 +17,7 @@ public class NinjaModel {
     private String nome;
     private String email;
     private int idade;
+    private List<MissoesNinjaModel> missoes;
 
     public NinjaModel() {}
 
