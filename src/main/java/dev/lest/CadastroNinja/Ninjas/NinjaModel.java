@@ -17,7 +17,9 @@ public class NinjaModel {
     private String nome;
     private String email;
     private int idade;
-    private List<MissoesNinjaModel> missoes;
+    @ManyToOne // Um ninja tem uma só missao
+    @JoinColumn(name = "missoes_id") // Fk da missao
+    private MissoesNinjaModel missoes;
 
     public NinjaModel() {}
 
@@ -25,6 +27,7 @@ public class NinjaModel {
         this.nome = nome;
         this.email = email;
         this.idade = idade;
+
     }
 
     public String getNome() {
