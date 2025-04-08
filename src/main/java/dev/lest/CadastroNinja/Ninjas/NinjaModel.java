@@ -14,13 +14,17 @@ public class NinjaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nome;
+
+    @Column(unique = true)
     private String email;
+
     private int idade;
+
     @ManyToOne // Um ninja tem uma só missao
     @JoinColumn(name = "missoes_id") // Fk da missao
     private MissoesNinjaModel missoes;
-
 
 }
 // Transforma uma classe em Entidade do DB
