@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class NinjaController {
 
-    @GetMapping("/")
+    @GetMapping("/Ninjas")
     public String index() {
         return "Olá! ";
     }
