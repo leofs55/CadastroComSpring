@@ -25,6 +25,8 @@ public class NinjaModel {
     @Column(name = "idade")
     private int idade;
 
+    @Column(name = "img_url")
+    private String img_url;
 
     @ManyToOne // Um ninja tem uma só missao
     @JoinColumn(name = "missoes_id") // Fk da missao
