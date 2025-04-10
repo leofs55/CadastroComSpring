@@ -6,11 +6,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/missao")
 public class MissoesController {
 
-    @GetMapping("/")
-    public String missoesHome() {
-        return "<h1> Oi</h1>";
-    }
-
     // Adicionar ninja:
 
     @PostMapping("/criar/")
