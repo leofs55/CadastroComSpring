@@ -15,21 +15,17 @@ public class NinjaController {
         this.ninjaService = ninjaService;
     }
 
-    @GetMapping("/")
-    public String index() {
-        return "Olá! ";
-    }
 
     // Adicionar ninja:
 
-    @PostMapping("/criar-ninja")
+    @PostMapping("/cadastrar")
     public String criarNinja() {
         return "Ninja Criado";
     }
 
     // Procurar ninja por id:
 
-    @GetMapping("/ninjas-cadastrados")
+    @GetMapping("/listar-ninjas")
     public List<NinjaModel> mostrarNinjas() {
 
         return ninjaService.listarNinjas();
@@ -37,9 +33,8 @@ public class NinjaController {
 
     // Mostrar Ninjas:
 
-    @GetMapping("/ninja-por-id")
-    @ResponseBody
-    public Optional<NinjaModel> mostrarNinja(@RequestParam(name = "id") Long id) {
+    @GetMapping("/ninja-id/{id}")
+    public NinjaModel mostrarNinja(@PathVariable Long id) {
         return ninjaService.ninjaPorId(id);
     }
 
@@ -52,7 +47,7 @@ public class NinjaController {
 
     // Remover ninja:
 
-    @PostMapping("/deletar-id")
+    @PostMapping("/deletar")
     public String deletarNinja() {
         return "Ninja Criado";
     }

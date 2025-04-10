@@ -13,35 +13,35 @@ public class MissoesController {
 
     // Adicionar ninja:
 
-    @PostMapping("/criar-missao")
+    @PostMapping("/criar/")
     public String criarMissao() {
         return "Missao Criado";
     }
 
     // Procurar ninja por id:
 
-    @GetMapping("missoes-cadastradas")
+    @GetMapping("/listar-missoes")
     public String mostrarMissoes() {
         return "Missao Criado";
     }
 
     // Mostrar Ninjas:
 
-    @PostMapping("/missao-por-id")
+    @PostMapping("/missao-id/{id]")
     public String mostrarMissao() {
         return "Missao Criado";
     }
 
     // Alterar dados de ninja:
 
-    @PutMapping("/alterar-id")
+    @PutMapping("/alterar")
     public String alterarMissao() {
         return "Missao Criado";
     }
 
     // Remover ninja:
 
-    @PostMapping("/deletar-id")
+    @PostMapping("/deletar")
     public String deletarMissao() {
         return "Missao Criado";
     }
