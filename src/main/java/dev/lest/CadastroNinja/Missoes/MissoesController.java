@@ -2,29 +2,37 @@ package dev.lest.CadastroNinja.Missoes;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/missao")
 public class MissoesController {
 
+    MissoesService missoesService;
+
+    public MissoesController(MissoesService missoesService) {
+        this.missoesService = missoesService;
+    }
+
     // Adicionar ninja:
 
-    @PostMapping("/criar/")
-    public String criarMissao() {
-        return "Missao Criado";
+    @PostMapping("/criar")
+    public MissoesNinjaModel criarMissao(@RequestBody MissoesNinjaModel missao) {
+        return missoesService.criarMissao(missao);
     }
 
     // Procurar ninja por id:
 
     @GetMapping("/listar-missoes")
-    public String mostrarMissoes() {
-        return "Missao Criado";
+    public List<MissoesNinjaModel> mostrarMissoes() {
+        return missoesService.listarMissoes();
     }
 
     // Mostrar Ninjas:
 
-    @PostMapping("/missao-id/{id]")
-    public String mostrarMissao() {
-        return "Missao Criado";
+    @GetMapping("/missao-id/{id]")
+    public MissoesNinjaModel mostrarMissao(@PathVariable Long id) {
+        return missoesService.buscarMissaoPorId(id);
     }
 
     // Alterar dados de ninja:
