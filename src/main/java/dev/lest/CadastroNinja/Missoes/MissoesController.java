@@ -30,7 +30,7 @@ public class MissoesController {
 
     // Mostrar Ninjas:
 
-    @GetMapping("/missao-id/{id]")
+    @GetMapping("/missao-id/{id}")
     public MissoesNinjaModel mostrarMissao(@PathVariable Long id) {
         return missoesService.buscarMissaoPorId(id);
     }
