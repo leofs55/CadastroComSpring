@@ -18,14 +18,14 @@ public class NinjaController {
 
     // Adicionar ninja:
 
-    @PostMapping("/cadastrar")
+    @PostMapping("/criar")
     public NinjaModel criarNinja(@RequestBody NinjaModel ninja) {
         return ninjaService.criarNinja(ninja);
     }
 
     // Procurar ninja por id:
 
-    @GetMapping("/listar-ninjas")
+    @GetMapping("/ninjas")
     public List<NinjaModel> mostrarNinjas() {
 
         return ninjaService.listarNinjas();
@@ -33,7 +33,7 @@ public class NinjaController {
 
     // Mostrar Ninjas:
 
-    @GetMapping("/ninja-id/{id}")
+    @GetMapping("/ninjas/{id}")
     public NinjaModel mostrarNinja(@PathVariable Long id) {
         return ninjaService.ninjaPorId(id);
     }

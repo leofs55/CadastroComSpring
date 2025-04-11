@@ -23,14 +23,14 @@ public class MissoesController {
 
     // Procurar ninja por id:
 
-    @GetMapping("/listar-missoes")
+    @GetMapping("/missoes")
     public List<MissoesNinjaModel> mostrarMissoes() {
         return missoesService.listarMissoes();
     }
 
     // Mostrar Ninjas:
 
-    @GetMapping("/missao-id/{id}")
+    @GetMapping("/missoes/{id}")
     public MissoesNinjaModel mostrarMissao(@PathVariable Long id) {
         return missoesService.buscarMissaoPorId(id);
     }
