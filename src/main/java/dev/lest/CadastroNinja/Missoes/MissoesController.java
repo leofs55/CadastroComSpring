@@ -44,8 +44,8 @@ public class MissoesController {
 
     // Remover ninja:
 
-    @PostMapping("/deletar")
-    public String deletarMissao() {
-        return "Missao Criado";
+    @DeleteMapping("/deletar/{id}")
+    public void deletarMissao(@PathVariable Long id) {
+        missoesService.deletarMissaoPorId(id);
     }
 }

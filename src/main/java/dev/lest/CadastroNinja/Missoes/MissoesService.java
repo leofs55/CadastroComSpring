@@ -26,4 +26,8 @@ public class MissoesService {
     public MissoesNinjaModel criarMissao(MissoesNinjaModel missao) {
         return repository.save(missao);
     }
+
+    public void deletarMissaoPorId(Long id) {
+        repository.deleteById(id);
+    }
 }
