@@ -31,5 +31,12 @@ public class NinjaService {
         repository.deleteById(id);
     }
 
+    public NinjaModel alterarNinja(NinjaModel ninja, Long id){
+        if (repository.existsById(id)) {
+            ninja.setId(id);
+            return repository.save(ninja);
+        }
+        return null;
+    }
 
 }

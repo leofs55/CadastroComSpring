@@ -37,9 +37,9 @@ public class MissoesController {
 
     // Alterar dados de ninja:
 
-    @PutMapping("/alterar")
-    public String alterarMissao() {
-        return "Missao Criado";
+    @PutMapping("/alterar/{id}")
+    public String alterarMissao(@PathVariable Long id, @RequestBody MissoesNinjaModel missoesNinjaModel) {
+        return alterarMissao(id, missoesNinjaModel);
     }
 
     // Remover ninja:
