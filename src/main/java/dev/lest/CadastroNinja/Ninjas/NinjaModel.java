@@ -14,7 +14,7 @@ public class NinjaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private long id;
 
     @Column(name = "nome")
     private String nome;
@@ -28,8 +28,11 @@ public class NinjaModel {
     @Column(name = "img_url")
     private String img_url;
 
-    @ManyToOne // Um ninja tem uma só missao
-    @JoinColumn(name = "missoes_id") // Fk da missao
+    @Column (name = "rank")
+    private String rank;
+
+    @ManyToOne
+    @JoinColumn(name = "missoes_id")
     private MissoesNinjaModel missoes;
 
 }
