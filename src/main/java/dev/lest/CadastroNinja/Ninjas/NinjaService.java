@@ -8,9 +8,12 @@ import java.util.Optional;
 @Service
 public class NinjaService {
 
+    //NinjaDTO
+    private NinjaMapper ninjaMapper;
     private NinjaRepository repository;
 
-    public NinjaService(NinjaRepository repository) {
+    public NinjaService(NinjaMapper ninjaMapper, NinjaRepository repository) {
+        this.ninjaMapper = ninjaMapper;
         this.repository = repository;
     }
 
@@ -18,20 +21,22 @@ public class NinjaService {
         return repository.findAll();
     }
 
-    public NinjaModel ninjaPorId(Long id) {
+    public NinjaModel ninjaPorId(long id) {
         Optional<NinjaModel> ninjaModel = repository.findById(id);
         return ninjaModel.orElse(null);
     }
 
-    public NinjaModel criarNinja(NinjaModel ninja){
-        return repository.save(ninja);
+    public NinjaDTO criarNinja(NinjaDTO ninja){
+        NinjaModel ninjaModel = ninjaMapper.map(ninja);
+        ninjaModel = repository.save(ninjaModel);
+        return ninjaMapper.map(ninjaModel);
     }
 
-    public void deletarNinjaPorId(Long id) {
+    public void deletarNinjaPorId(long id) {
         repository.deleteById(id);
     }
 
-    public NinjaModel alterarNinja(NinjaModel ninja, Long id){
+    public NinjaModel alterarNinja(NinjaModel ninja, long id){
         if (repository.existsById(id)) {
             ninja.setId(id);
             return repository.save(ninja);
