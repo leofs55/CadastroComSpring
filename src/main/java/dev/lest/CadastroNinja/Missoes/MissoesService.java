@@ -19,7 +19,7 @@ public class MissoesService {
         return repository.findAll();
     }
 
-    public MissoesNinjaModel buscarMissaoPorId(Long id) {
+    public MissoesNinjaModel buscarMissaoPorId(long id) {
         Optional<MissoesNinjaModel> optional = repository.findById(id);
         return optional.orElse(null);
     }
@@ -28,11 +28,11 @@ public class MissoesService {
         return repository.save(missao);
     }
 
-    public void deletarMissaoPorId(Long id) {
+    public void deletarMissaoPorId(long id) {
         repository.deleteById(id);
     }
 
-    public MissoesNinjaModel alterarMissao(MissoesNinjaModel missaoAtualizada, Long id) {
+    public MissoesNinjaModel alterarMissao(MissoesNinjaModel missaoAtualizada, long id) {
         if (repository.existsById(id)) {
             missaoAtualizada.setId(id);
             return repository.save(missaoAtualizada);

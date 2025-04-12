@@ -31,21 +31,21 @@ public class MissoesController {
     // Mostrar Ninjas:
 
     @GetMapping("/missoes/{id}")
-    public MissoesNinjaModel mostrarMissao(@PathVariable Long id) {
+    public MissoesNinjaModel mostrarMissao(@PathVariable long id) {
         return missoesService.buscarMissaoPorId(id);
     }
 
     // Alterar dados de ninja:
 
     @PutMapping("/alterar/{id}")
-    public String alterarMissao(@PathVariable Long id, @RequestBody MissoesNinjaModel missoesNinjaModel) {
+    public String alterarMissao(@PathVariable long id, @RequestBody MissoesNinjaModel missoesNinjaModel) {
         return alterarMissao(id, missoesNinjaModel);
     }
 
     // Remover ninja:
 
     @DeleteMapping("/deletar/{id}")
-    public void deletarMissao(@PathVariable Long id) {
+    public void deletarMissao(@PathVariable long id) {
         missoesService.deletarMissaoPorId(id);
     }
 }
