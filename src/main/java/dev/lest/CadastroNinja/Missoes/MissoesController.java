@@ -17,29 +17,29 @@ public class MissoesController {
     // Adicionar ninja:
 
     @PostMapping("/criar")
-    public MissoesNinjaModel criarMissao(@RequestBody MissoesNinjaModel missao) {
+    public MissoesDTO criarMissao(@RequestBody MissoesDTO missao) {
         return missoesService.criarMissao(missao);
     }
 
     // Procurar ninja por id:
 
     @GetMapping("/missoes")
-    public List<MissoesNinjaModel> mostrarMissoes() {
+    public List<MissoesDTO> mostrarMissoes() {
         return missoesService.listarMissoes();
     }
 
     // Mostrar Ninjas:
 
     @GetMapping("/missoes/{id}")
-    public MissoesNinjaModel mostrarMissao(@PathVariable long id) {
+    public MissoesDTO mostrarMissao(@PathVariable long id) {
         return missoesService.buscarMissaoPorId(id);
     }
 
     // Alterar dados de ninja:
 
     @PutMapping("/alterar/{id}")
-    public String alterarMissao(@PathVariable long id, @RequestBody MissoesNinjaModel missoesNinjaModel) {
-        return alterarMissao(id, missoesNinjaModel);
+    public MissoesDTO alterarMissao(@PathVariable long id, @RequestBody MissoesDTO missoesNinjaModel) {
+        return  missoesService.alterarMissaoAntiga(missoesNinjaModel, id);
     }
 
     // Remover ninja:
