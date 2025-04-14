@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/missao")
+@RequestMapping("/missoes")
 public class MissoesController {
 
     MissoesService missoesService;
@@ -17,35 +17,35 @@ public class MissoesController {
     // Adicionar ninja:
 
     @PostMapping("/criar")
-    public MissoesNinjaModel criarMissao(@RequestBody MissoesNinjaModel missao) {
+    public MissoesDTO criarMissao(@RequestBody MissoesDTO missao) {
         return missoesService.criarMissao(missao);
     }
 
     // Procurar ninja por id:
 
     @GetMapping("/missoes")
-    public List<MissoesNinjaModel> mostrarMissoes() {
+    public List<MissoesDTO> mostrarMissoes() {
         return missoesService.listarMissoes();
     }
 
     // Mostrar Ninjas:
 
     @GetMapping("/missoes/{id}")
-    public MissoesNinjaModel mostrarMissao(@PathVariable Long id) {
+    public MissoesDTO mostrarMissao(@PathVariable long id) {
         return missoesService.buscarMissaoPorId(id);
     }
 
     // Alterar dados de ninja:
 
     @PutMapping("/alterar/{id}")
-    public String alterarMissao(@PathVariable Long id, @RequestBody MissoesNinjaModel missoesNinjaModel) {
-        return alterarMissao(id, missoesNinjaModel);
+    public MissoesDTO alterarMissao(@PathVariable long id, @RequestBody MissoesDTO missoesNinjaModel) {
+        return  missoesService.alterarMissaoAntiga(missoesNinjaModel, id);
     }
 
     // Remover ninja:
 
     @DeleteMapping("/deletar/{id}")
-    public void deletarMissao(@PathVariable Long id) {
+    public void deletarMissao(@PathVariable long id) {
         missoesService.deletarMissaoPorId(id);
     }
 }
