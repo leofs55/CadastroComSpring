@@ -1,6 +1,8 @@
 package dev.lest.CadastroNinja.Missoes;
 
 import dev.lest.CadastroNinja.Ninjas.NinjaModel;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,36 +21,51 @@ public class MissoesService {
         this.missoesMapper = missoesMapper;
     }
 
-    public List<MissoesDTO> listarMissoes(){
+    public ResponseEntity<List<MissoesDTO>> listarMissoes(){
         List<MissoesNinjaModel> ninjaModelList = repository.findAll();
-        return ninjaModelList.stream()
-                .map(missoesMapper::map)
-                .collect(Collectors.toList());
+        List<MissoesDTO> missoesDTOList = ninjaModelList.stream()
+                                                            .map(missoesMapper::map)
+                                                            .collect(Collectors.toList());
+        return ResponseEntity.ok(missoesDTOList);
     }
 
-    public MissoesDTO buscarMissaoPorId(long id) {
+    public ResponseEntity<?> buscarMissaoPorId(long id) {
         Optional<MissoesNinjaModel> optional = repository.findById(id);
-        return optional.map(missoesMapper::map).orElse(null);
+        if (optional.isPresent()) {
+            MissoesDTO missoesDTO = optional.map(missoesMapper::map).get();
+            return ResponseEntity.ok(missoesDTO);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("A missão de id: "+ id + " não foi encontrada!");
     }
 
-    public MissoesDTO criarMissao(MissoesDTO missao) {
+    public ResponseEntity<MissoesDTO> criarMissao(MissoesDTO missao) {
         MissoesNinjaModel missoesNinjaModel = missoesMapper.map(missao);
         missoesNinjaModel = repository.save(missoesNinjaModel);
-        return missoesMapper.map(missoesNinjaModel);
+        MissoesDTO missoesDTO = missoesMapper.map(missoesNinjaModel);
+        return ResponseEntity.status(HttpStatus.CREATED).body(missoesDTO);
     }
 
-    public void deletarMissaoPorId(long id) {
-        repository.deleteById(id);
+    public ResponseEntity<String> deletarMissaoPorId(long id) {
+        Optional<MissoesNinjaModel> missaoExistente = repository.findById(id);
+        if (missaoExistente.isPresent()) {
+            repository.deleteById(id);
+            return ResponseEntity.ok("Missão com id: " + id + " foi deletado com sucesso!");
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("A missão de id: "+ id + " não foi encontrada!");
     }
 
-    public MissoesDTO alterarMissaoAntiga(MissoesDTO missaoAtualizada, long id) {
+    public ResponseEntity<?> alterarMissaoAntiga(MissoesDTO missaoAtualizada, long id) {
         Optional<MissoesNinjaModel> missaoExistente = repository.findById(id);
         if (missaoExistente.isPresent()) {
             MissoesNinjaModel missaoNova = missoesMapper.map(missaoAtualizada);
             missaoNova.setId(id);
             MissoesNinjaModel missaoSalva = repository.save(missaoNova);
-            return missoesMapper.map(missaoSalva);
+            MissoesDTO missoesDTO = missoesMapper.map(missaoSalva);
+            return ResponseEntity.ok("");
         }
-        return null;
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("A missão de id: "+ id + " não foi encontrada!");
     }
 }
