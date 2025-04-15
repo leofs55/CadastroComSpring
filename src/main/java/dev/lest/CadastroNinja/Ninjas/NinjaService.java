@@ -21,6 +21,13 @@ public class NinjaService {
         this.repository = repository;
     }
 
+    public List<NinjaDTO> listarNinjasUi() {
+        List<NinjaModel> ninjaModel = repository.findAll();
+        return ninjaModel.stream()
+                                .map(ninjaMapper::map)
+                                .collect(Collectors.toList());
+    }
+
     public ResponseEntity<List<NinjaDTO>> listarNinjas() {
         List<NinjaModel> ninjaModel = repository.findAll();
         List<NinjaDTO> ninjaDTOList =  ninjaModel.stream()
