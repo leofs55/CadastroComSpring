@@ -8,7 +8,7 @@ import java.util.List;
 @RequestMapping("/missoes")
 public class MissoesController {
 
-    MissoesService missoesService;
+    private final MissoesService missoesService;
 
     public MissoesController(MissoesService missoesService) {
         this.missoesService = missoesService;

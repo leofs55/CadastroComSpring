@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 public class NinjaService {
 
     //NinjaDTO
-    private NinjaMapper ninjaMapper;
-    private NinjaRepository repository;
+    private final NinjaMapper ninjaMapper;
+    private final NinjaRepository repository;
 
     public NinjaService(NinjaMapper ninjaMapper, NinjaRepository repository) {
         this.ninjaMapper = ninjaMapper;
