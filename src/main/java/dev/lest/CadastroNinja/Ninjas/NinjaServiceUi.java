@@ -4,38 +4,35 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class NinjaService {
+public class NinjaServiceUi {
 
     //NinjaDTO
     private final NinjaMapper ninjaMapper;
     private final NinjaRepository repository;
 
-    public NinjaService(NinjaMapper ninjaMapper, NinjaRepository repository) {
+    public NinjaServiceUi(NinjaMapper ninjaMapper, NinjaRepository repository) {
         this.ninjaMapper = ninjaMapper;
         this.repository = repository;
     }
 
-
-    public ResponseEntity<List<NinjaDTO>> listarNinjas() {
+    public List<NinjaDTO> listarNinjas() {
         List<NinjaModel> ninjaModel = repository.findAll();
-        List<NinjaDTO> ninjaDTOList =  ninjaModel.stream()
-                                                .map(ninjaMapper::map)
-                                                .collect(Collectors.toList());
-        return ResponseEntity.ok(ninjaDTOList);
+        return ninjaModel.stream()
+                .map(ninjaMapper::map)
+                .collect(Collectors.toList());
     }
 
-    public ResponseEntity<?> ninjaPorId(long id) {
+    public NinjaDTO ninjaPorId(long id) {
         Optional<NinjaModel> ninjaModel = repository.findById(id);
         if (ninjaModel.isPresent()) {
-            return ResponseEntity.ok(ninjaModel.map(ninjaMapper::map).orElse(null));
+            return ninjaModel.map(ninjaMapper::map).orElse(null);
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O ninja de id: "+ id + " não foi encontrado!");
+        return null;
     }
 
     public NinjaDTO criarNinja(NinjaDTO ninja){
@@ -44,13 +41,10 @@ public class NinjaService {
         return ninjaMapper.map(ninjaModel);
     }
 
-    public ResponseEntity<String> deletarNinjaPorId(long id) {
+    public String deletarNinjaPorId(long id) {
         Optional<NinjaModel> ninjaExistente = repository.findById(id);
-        if (ninjaExistente.isPresent()) {
-            repository.deleteById(id);
-            return ResponseEntity.ok("Ninja do id: " + id + " foi deletado com sucesso!");
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O ninja de id: "+ id + " não foi encontrado!");
+        repository.delete(ninjaExistente.get());
+        return "redirect:/ninjas/ui/listar";
     }
 
     public ResponseEntity<?> alterarNinja(NinjaDTO ninja, long id){
